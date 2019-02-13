@@ -46,11 +46,8 @@ Java 11, OpenCV
    public class Target {
 
     private double horizontalAngle, verticalAngle;
-
     private double percentArea;
-
     private double skew;
-
     private RotatedRect boundary;
 
     public Target(double horizontalAngle, double verticalAngle, double percentArea, double skew, RotatedRect boundary) {
@@ -62,13 +59,9 @@ Java 11, OpenCV
     }
 
     public RotatedRect getBoundary() { return boundary; }
-
     public double getHorizontalAngle() { return horizontalAngle; }
-    
     public double getVerticalAngle() { return verticalAngle; }
-
     public double getPercentArea() { return percentArea; }
-
     public double getSkew() { return skew; }
 
     @Override
@@ -88,13 +81,7 @@ Java 11, OpenCV
 
     @Override
     public String toString() {
-        return "Target{" +
-                "horizontalAngle=" + horizontalAngle +
-                ", verticalAngle=" + verticalAngle +
-                ", percentArea=" + percentArea +
-                ", skew=" + skew +
-                ", boundary=" + boundary +
-                '}';
+        return "Target{" + "horizontalAngle=" + horizontalAngle + ", verticalAngle=" + verticalAngle + ", percentArea=" + percentArea + ", skew=" + skew + ", boundary=" + boundary + '}';
     }
 }
 ```
