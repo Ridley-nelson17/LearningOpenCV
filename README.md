@@ -33,8 +33,21 @@ Java 11, OpenCV
 
 ## The Camera
 
-## The Target
+   ### Setting the Camera Input Port
+   
+   ### Sending the output to a Server
 
+## The Target
+   
    ### Combining The Objects
    
-   hi
+   ### Setting the target
+   
+## Connecting to the Raspberry Pi
+
+## Finding Angles
+
+## Motor control
+
+##
+##
