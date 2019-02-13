@@ -1,5 +1,5 @@
 # LearningOpenCV
-A reposiaitory that demonstrates how to use OpenCV for Vision Processing
+A reposiaitory that demonstrates how to use Java and OpenCV for Vision Processing
 
 ### Index
 
@@ -8,6 +8,11 @@ A reposiaitory that demonstrates how to use OpenCV for Vision Processing
 - [Sources](/README.md#sources)
 - [The Docs](/README.md#the-docs)
    - [The Camera Settings](/README.md#the-camera)
+   - [](/README.md#)
+   - [](/README.md#)
+   - [](/README.md#)
+   - [](/README.md#)
+   - [](/README.md#)
 
 =================================================================================
 ### Usage/Building on Desktop
@@ -29,4 +34,5 @@ Java 11, OpenCV
 ## The Camera
 
 ## The Target
-### Combining The Objects
+
+   ### Combining The Objects
