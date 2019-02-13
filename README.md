@@ -6,10 +6,8 @@ A reposiaitory that demonstrates how to use OpenCV for Vision Processing
 - [Usage/Building on Desktop](/README.md#usagebuilding-on-desktop)
 - [Bugs](/README.md#bugs)
 - [Sources](/README.md#sources)
-- [The Docs](/README.md#thedocs)
-
-1. First list item
-   - First nested list item
+- [The Docs](/README.md#the-docs)
+   - [The Camera Settings](/README.md#camera)
 
 =================================================================================
 ### Usage/Building on Desktop
@@ -27,3 +25,5 @@ Currently, I know that there is one issue in `Scannable.java` that throws an IOE
 Java 11, OpenCV
 
 ## The Docs
+
+### camera
