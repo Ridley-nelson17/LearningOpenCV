@@ -9,3 +9,9 @@ A reposiaitory that demonstrates how to use OpenCV for Vision Processing
 4. Hold up the vision target in the cameras range of view and watch the console blow up
 
 =================================================================================
+
+=================================================================================
+### Bugs
+Currently, I know that there is one issue in `Scannable.java` that throws an IOException probably because I have not implamented the class properly
+
+=================================================================================
