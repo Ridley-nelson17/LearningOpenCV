@@ -7,11 +7,11 @@ A reposiaitory that demonstrates how to use Java and OpenCV for Vision Processin
 - [Bugs](/README.md#bugs)
 - [Sources](/README.md#sources)
 - [The Docs](/README.md#the-docs)
-   - [The Camera Settings](/README.md#the-camera)
-   - [](/README.md#)
-   - [](/README.md#)
-   - [](/README.md#)
-   - [](/README.md#)
+   - [The Camera Class](/README.md#camera)
+   - [The Target Class](/README.md#target)
+   - [Connecting to a Raspberry Pi](/README.md#connecting-to-a-raspberry-pi)
+   - [Finding Angles](/README.md#)
+   - [Controling Motors](/README.md#)
    - [](/README.md#)
 
 =================================================================================
@@ -29,21 +29,21 @@ Currently, I know that there is one issue in `Scannable.java` that throws an IOE
 ### Sources
 Java 11, OpenCV
 
-# The Docs
+# Docs
 
-## The Camera
+## Camera
 
    ### Setting the Camera Input Port
    
    ### Sending the output to a Server
 
-## The Target
+## Target
    
    ### Combining The Objects
    
    ### Setting the target
    
-## Connecting to the Raspberry Pi
+## Connecting to a Raspberry Pi
 
 ## Finding Angles
 
