@@ -10,8 +10,5 @@ A reposiaitory that demonstrates how to use OpenCV for Vision Processing
 
 =================================================================================
 
-=================================================================================
 ### Bugs
 Currently, I know that there is one issue in `Scannable.java` that throws an IOException probably because I have not implamented the class properly
-
-=================================================================================
