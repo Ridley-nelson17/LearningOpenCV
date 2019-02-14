@@ -30,6 +30,7 @@ Currently, I know that there is one issue in `Scannable.java` that throws an IOE
 Java 11, OpenCV
 
 # Docs
+**Note** the code in this repo demonstrates how to use OpenCV and Java for the 2018-2019 FIRST Robotics Compitition.
 
 ## Camera
 
@@ -42,52 +43,50 @@ Java 11, OpenCV
    ### Combining The Objects
    
    ### Setting the target
-   So technically `ContourToTargetConverter.java` converts the vision tape into a target, but ```[RectToTargetHelper.java](/src/main/java/com/RidleyNelson17/lib/vision/targetConverters/RectToTargetHelper.java)``` does the most work. So in [RectToTargetHelper.java](/src/main/java/com/RidleyNelson17/lib/vision/targetConverters/RectToTargetHelper.java)
+   So technically `ContourToTargetConverter.java` converts the vision tape into a target, but `RectToTargetHelper.java` does the most work. So in [RectToTargetHelper.java](/src/main/java/com/RidleyNelson17/lib/vision/targetConverters/RectToTargetHelper.java) 
    
    ```
    class RectToTargetHelper {
-   private final double cameraWidth;
-   private final double cameraHeight;
-   private final double vpw;
-   private final double vph;
-   private final double imageArea;
+      private final double cameraWidth;
+      private final double cameraHeight;
+      private final double vpw;
+      private final double vph;
+      private final double imageArea;
 
-    public RectToTargetHelper(CameraSettings cameraSettings){
+      public RectToTargetHelper(CameraSettings cameraSettings){
          cameraWidth = cameraSettings.getResolution().getWidth();
          cameraHeight = cameraSettings.getResolution().getHeight();
 
-        double horizontalFOV = Math.toRadians(cameraSettings.getFov().getHorizontalDegrees());
-        double verticalFOV = Math.toRadians(cameraSettings.getFov().getVerticalDegrees());
+         double horizontalFOV = Math.toRadians(cameraSettings.getFov().getHorizontalDegrees());
+         double verticalFOV = Math.toRadians(cameraSettings.getFov().getVerticalDegrees());
 
+         vpw = 2.0 * Math.tan(horizontalFOV / 2.0);
+         vph = 2.0 * Math.tan(verticalFOV / 2.0);
 
-        vpw = 2.0 * Math.tan(horizontalFOV / 2.0);
-        vph = 2.0 * Math.tan(verticalFOV / 2.0);
+         imageArea = cameraWidth * cameraHeight;
+      }
 
-        imageArea = cameraWidth * cameraHeight;
-    }
+      public Target convertRectToTarget(RotatedRect boundary){
+         double nx = (2.0 / cameraWidth) * (boundary.center.x - cameraWidth / 2.0 - 0.5);
+         double ny = (2.0 / cameraHeight) * (boundary.center.y - cameraHeight / 2.0 - 0.5);
 
-    public Target convertRectToTarget(RotatedRect boundary){
-        double nx = (2.0 / cameraWidth) * (boundary.center.x - cameraWidth / 2.0 - 0.5);
-        double ny = (2.0 / cameraHeight) * (boundary.center.y - cameraHeight / 2.0 - 0.5);
+         double x = vpw / 2.0 * nx;
+         double y = vph / 2.0 * ny;
 
-        double x = vpw / 2.0 * nx;
-        double y = vph / 2.0 * ny;
+         double horizontalAngle = Math.toDegrees(Math.atan(x));
+         double verticalAngle = -Math.toDegrees(Math.atan(y));
 
-        double horizontalAngle = Math.toDegrees(Math.atan(x));
-        double verticalAngle = -Math.toDegrees(Math.atan(y));
-
-        double percentArea = boundary.size.area() / imageArea * 100.0;
-        double skew = boundary.angle;
-        if (boundary.size.width < boundary.size.height){
+         double percentArea = boundary.size.area() / imageArea * 100.0;
+         double skew = boundary.angle;
+         if (boundary.size.width < boundary.size.height){
             skew = 90 + boundary.angle;
-        }
+         }
+         
+         return new Target(horizontalAngle, verticalAngle, percentArea, skew, boundary);
+      }
 
-
-        return new Target(horizontalAngle, verticalAngle, percentArea, skew, boundary);
-    }
-
-}
-```
+   }
+   ```
    
 ## Connecting to a Raspberry Pi
 
