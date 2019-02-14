@@ -42,47 +42,50 @@ Java 11, OpenCV
    ### Combining The Objects
    
    ### Setting the target
+   So technically `ContourToTargetConverter.java` converts the vision tape into a target, but `RectToTargetHelper.java` does the most work. So in `RectToTargetHelper.java` 
+   
    ```
-   public class Target {
+   class RectToTargetHelper {
+   private final double cameraWidth;
+   private final double cameraHeight;
+   private final double vpw;
+   private final double vph;
+   private final double imageArea;
 
-    private double horizontalAngle, verticalAngle;
-    private double percentArea;
-    private double skew;
-    private RotatedRect boundary;
+    public RectToTargetHelper(CameraSettings cameraSettings){
+         cameraWidth = cameraSettings.getResolution().getWidth();
+         cameraHeight = cameraSettings.getResolution().getHeight();
 
-    public Target(double horizontalAngle, double verticalAngle, double percentArea, double skew, RotatedRect boundary) {
-        this.horizontalAngle = horizontalAngle;
-        this.verticalAngle = verticalAngle;
-        this.percentArea = percentArea;
-        this.skew = skew;
-        this.boundary = boundary;
+        double horizontalFOV = Math.toRadians(cameraSettings.getFov().getHorizontalDegrees());
+        double verticalFOV = Math.toRadians(cameraSettings.getFov().getVerticalDegrees());
+
+
+        vpw = 2.0 * Math.tan(horizontalFOV / 2.0);
+        vph = 2.0 * Math.tan(verticalFOV / 2.0);
+
+        imageArea = cameraWidth * cameraHeight;
     }
 
-    public RotatedRect getBoundary() { return boundary; }
-    public double getHorizontalAngle() { return horizontalAngle; }
-    public double getVerticalAngle() { return verticalAngle; }
-    public double getPercentArea() { return percentArea; }
-    public double getSkew() { return skew; }
+    public Target convertRectToTarget(RotatedRect boundary){
+        double nx = (2.0 / cameraWidth) * (boundary.center.x - cameraWidth / 2.0 - 0.5);
+        double ny = (2.0 / cameraHeight) * (boundary.center.y - cameraHeight / 2.0 - 0.5);
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Target target = (Target) o;
-        return Double.compare(target.horizontalAngle, horizontalAngle) == 0 &&
-                Double.compare(target.verticalAngle, verticalAngle) == 0 &&
-                Double.compare(target.percentArea, percentArea) == 0 &&
-                Double.compare(target.skew, skew) == 0 &&
-                Objects.equals(boundary, target.boundary);
+        double x = vpw / 2.0 * nx;
+        double y = vph / 2.0 * ny;
+
+        double horizontalAngle = Math.toDegrees(Math.atan(x));
+        double verticalAngle = -Math.toDegrees(Math.atan(y));
+
+        double percentArea = boundary.size.area() / imageArea * 100.0;
+        double skew = boundary.angle;
+        if (boundary.size.width < boundary.size.height){
+            skew = 90 + boundary.angle;
+        }
+
+
+        return new Target(horizontalAngle, verticalAngle, percentArea, skew, boundary);
     }
 
-    @Override
-    public int hashCode() { return Objects.hash(horizontalAngle, verticalAngle, percentArea, skew, boundary); }
-
-    @Override
-    public String toString() {
-        return "Target{" + "horizontalAngle=" + horizontalAngle + ", verticalAngle=" + verticalAngle + ", percentArea=" + percentArea + ", skew=" + skew + ", boundary=" + boundary + '}';
-    }
 }
 ```
    
