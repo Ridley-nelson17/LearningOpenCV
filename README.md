@@ -18,7 +18,7 @@ A reposiaitory that demonstrates how to use Java and OpenCV for Vision Processin
 ### Usage/Building on Desktop
 1. Download the .zip archive and move it over to IntelliJ.
 2. Make sure there is a camera attached to the computer you are using, it doesn't matter if it is ther built in one facing you
-3. Run as a java application
+3. Run as a **Gradle** project
 4. Hold up the vision target in the cameras range of view and watch the console blow up
 
 =================================================================================
