@@ -1,4 +1,4 @@
-# LearningOpenCV
+# LearningOpenCV - Depricated (For Now)
 A reposiaitory that demonstrates how to use Java and OpenCV for Vision Processing
 
 ### Index
